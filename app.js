@@ -1,20 +1,35 @@
-import express, { response, request } from 'express'
+import express from 'express'
 import dbQuery from './DatabaseFiles/dev/dbQuery';
 import {createAnimalsTable} from './DatabaseFiles/dev/dbConnection'
 
 const PORT = 3000
 const server = express();
 
-const constructURL = (version, urlPath) => `api/${version}/${urlPath}`
+const constructURL = (version, urlPath) => `/api/${version}/${urlPath}`
 
-server.get(constructURL('v1','get_list'),(request, response) => {
+server.get(constructURL('v1','list'),(req, res) => {
     
-    response.send("First Route")
+   // createAnimalsTable()
+    
+    const all = dbQuery.query("SELECT * FROM ANIMALS")
+
+    res.json(all)
+        
 })
 
-server.listen(PORT, () => {
+server.listen(PORT,  () => {
 
-    createAnimalsTable() //Table was successfully created !
-    console.log(`server started on port ${PORT} `)
+    try{
+        console.log(`server started on port ${PORT} `)
+           createAnimalsTable() //Table was successfully created !
+    }
+    catch (error){
+
+        console.log(error)
+
+    }
+    
+    
+    
 
 })

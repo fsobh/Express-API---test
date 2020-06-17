@@ -8,6 +8,7 @@ pool.on('connect', () => {
 
 //create animal table if not exists
 const createAnimalsTable = () => {
+  console.log("Created tables....")
   const animalCreateQuery = `CREATE TABLE IF NOT EXISTS Animals
   (id SERIAL PRIMARY KEY,  
   animal_name VARCHAR(25), 
