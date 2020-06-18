@@ -1,62 +1,26 @@
 import express, { response } from 'express'
-import dbQuery from './DatabaseFiles/dev/dbQuery';
+import AnimalRoute from './routes/animalRoute'
+import bodyparser from 'body-parser'
+import morgan from 'morgan'// middleware dependency
+
+//Ask Greg Why calling this at any endpoint causes the request to fail.
 import { createAnimalsTable } from './DatabaseFiles/dev/dbConnection';
 
 
+//Local testing is happening on port 3000
 const PORT = 3000
 const server = express();
 
-//generate URL for each endpoint
+//generate URL for each endpoint using the version and path strings passed in 
 const constructURL = (version, urlPath) => `/api/${version}/${urlPath}`
 
-//Get all animals
-server.get(constructURL('v1','list_animals'),(req, response) => {
+server.use(morgan('tiny')) //middleware dependency
+server.use(bodyparser.json()) // data in the body in json format
 
-     dbQuery.query("SELECT * FROM animals").then((res) => {
+server.use(constructURL('v1','animals'), AnimalRoute) // tell the serever that requests with the following url
+// (/api/v1/animals) are to be routed to the Animal router file where the endpoints were declared. The router file was imported at the top
 
-        response.send(JSON.stringify(res.rows))
-      
-    })
-})
 
-//Get animal by id 
-server.get(`${constructURL('v1','list_animal')}/:id`,(req, response) => {
-
-    const animal_id = req.params.id
-
-    dbQuery.query("SELECT * FROM animals WHERE ID = $1", [animal_id]).then((res) => {
-
-        res ?
-    res.rowCount > 0 ? response.send(JSON.stringify(res.rows)) : response.send("Animal Does not exist") : res.send("Resource Error")
-
-       
-     
-   })
-})
-
-//Add an animal
-server.post(constructURL('v1','update_animal'),(req, response) => {
-
-    
-    response.end()
-
-})
-
-//Update an animal by ID
-server.put(constructURL('v1','add_animal'),(req, response) => {
-
-    
-    response.end()
-
-})
-
-//remove an animal
-server.delete(constructURL('v1','remove_animal'),(req, response) => {
-
-    
-    response.end()
-
-})
 
 server.listen(PORT, () => {
 
