@@ -1,0 +1,18 @@
+[
+    {
+        "id" : 1,
+        "name" : "Bob",
+        "type" : "Lion"
+    },
+    {
+        "id" : 2,
+        "name" : "Leah",
+        "type" : "Elephant"
+    },
+
+    {
+        "id" : 3,
+        "name" : "Dexter",
+        "type" : "Lion"
+    }
+]

@@ -11,28 +11,29 @@ app.use(express.json()); // requests will use json format
 const constructURL = (version, urlPath) => `/api/${version}/${urlPath}`;
 
 // set routers here //
-//app.use(constructURL("v1", "animals"), animalRoute); //set animals route
+//app.use(morgan("tiny")); //middleware dependency
+app.use(constructURL("v1", "animals"), animalRoute); //set animals route
 
 app.set("/", (req, res) => {
   res.sendStatus(200);
 });
 
-massive({
-  database: process.env.DATABASE, // database name
-  host: process.env.DB_HOST, //host
-  user: process.env.DB_USER,
-  port: process.env.DB_PORT,
-  password: process.env.DB_PASSWORD,
-})
-  .then((database) => {
-    app.set("database", database);
-    console.log("Connected to Remote Database");
+// massive({
+//   database: process.env.DATABASE, // database name
+//   host: process.env.DB_HOST, //host
+//   user: process.env.DB_USER,
+//   port: process.env.DB_PORT,
+//   password: process.env.DB_PASSWORD,
+// })
+//   .then((database) => {
+//     app.set("database", database);
+//     console.log("Connected to Remote Database");
 
-    module.exports = database; // ask greg why we did this
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+//     module.exports = database; // ask greg why we did this
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 //establish connection
 app.listen(PORT, () => {
