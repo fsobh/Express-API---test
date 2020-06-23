@@ -6,18 +6,17 @@ const routeController = require("../Controllers/animalController")
 const router = express.Router();
 
 
-
+//get all animals
 router.get("/getAnimals" , routeController.getAnimals)
-
-
-//route for get by id
-
+// get animal by id
 router.get("/getAnimal/:id" , routeController.getAnimalById)
-
+//delete animal
+router.get("/deleteAnimal/:id" , routeController.deleteAnimal)
+//edit animal
 router.post("/changeAnimalDetails", routeController.changeAnimalDetails)
-//route to delete
+//add animal
+router.post("/addAnimal", routeController.addAnimal)
 
-//route to add
 
 //export router
 module.exports = router

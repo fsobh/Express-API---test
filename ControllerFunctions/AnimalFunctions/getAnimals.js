@@ -3,7 +3,8 @@ async function getAnimals (req,res){
 
     try{
 
-        res.status(200).send(Animals)
+        Animals.length > 0 ?
+        res.status(200).send(Animals) : res.status(200).send("No Animals are curremtly recorded")
 
     }catch(error){
         console.log(error)
