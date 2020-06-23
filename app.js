@@ -15,7 +15,7 @@ const constructURL = (version, urlPath) => `/api/${version}/${urlPath}`;
 app.use(constructURL("v1", "animals"), animalRoute); //set animals route
 
 app.set("/", (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send("home");
 });
 
 // massive({
