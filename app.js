@@ -1,8 +1,8 @@
 const express = require("express"); //import express
 const massive = require("massive"); //import massive as the access tool were using to communicate back and forth with the database
 const animalRoute = require("./routes/animalRoute"); //animal routes
-const PORT = process.env.PORT || 3000; /*Testing on port 3000 */
-require("dotenv").config();
+const PORT = process.env.PORT; //|| 3000; /*Testing on port 3000 */
+//require("dotenv").config();
 
 const app = express(); /* Standard */
 
