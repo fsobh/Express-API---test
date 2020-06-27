@@ -1,13 +1,14 @@
 const express = require("express"); //import express
 const massive = require("massive"); //import massive as the access tool were using to communicate back and forth with the database
 const animalRoute = require("./routes/animalRoute"); //animal routes
-const PORT = process.env.PORT || 3000; /*Testing on port 3000 */
+const PORT = process.env.PORT || 4000; /*Testing on port 3000 */
+const corse = require("cors");
 require("dotenv").config();
 
 const app = express(); /* Standard */
 
 app.use(express.json()); // requests will use json format
-
+app.use(corse());
 const constructURL = (version, urlPath) => `/api/${version}/${urlPath}`;
 
 // set routers here //
