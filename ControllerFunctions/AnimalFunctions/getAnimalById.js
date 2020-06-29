@@ -4,10 +4,14 @@ const getAnimalByID = (req, res) => {
     try{
 
     let animal = Animals.find(an => an.id == req.params.id); //thank you ES6
- 
-    animal === undefined ? res.status(200).send(`Animal with ID ${req.params.id} does Not exist`) : res.status(200).send(`ID provided ${req.params.id} \n ${JSON.stringify(animal) }`) 
-    
-
+    if (animal) {
+        
+        return res.status(200).send(JSON.stringify(animal));
+  
+      }
+      else {
+        return res.status(200).send(`Animal with ID ${req.params.id} does Not exist`);
+    }
 
 }catch(err){
     console.log(err)

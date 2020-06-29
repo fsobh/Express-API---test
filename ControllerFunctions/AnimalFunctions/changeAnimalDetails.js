@@ -10,10 +10,18 @@ const changeAnimalDetails = (req, res) => {
         else {
 
             let animal = Animals.find(an => an.id == req.body.id); //thank you ES6
- 
-            animal === undefined ? res.status(200).send(`Animal with ID ${req.body.id} does Not exist`) : animal.type = req.body.type
 
-            res.status(200).send(animal)
+            if (animal) {
+
+                animal.type = req.body.type
+          
+                return res.status(200).send(JSON.stringify(Animals));
+          
+              }
+              else {
+                return res.status(200).send(`Animal with ID ${req.params.id} does Not exist`);
+            }
+
 
         }
 

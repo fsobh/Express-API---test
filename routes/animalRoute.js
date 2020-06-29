@@ -11,9 +11,9 @@ router.get("/getAnimals" , routeController.getAnimals)
 // get animal by id
 router.get("/getAnimal/:id" , routeController.getAnimalById)
 //delete animal
-router.get("/deleteAnimal/:id" , routeController.deleteAnimal)
+router.delete("/deleteAnimal/:id" , routeController.deleteAnimal)
 //edit animal
-router.post("/changeAnimalDetails", routeController.changeAnimalDetails)
+router.put("/changeAnimalDetails", routeController.changeAnimalDetails)
 //add animal
 router.post("/addAnimal", routeController.addAnimal)
 
